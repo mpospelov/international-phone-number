@@ -90,6 +90,9 @@
                 ctrl.$modelValue = newValue;
               }
               element.intlTelInput(options);
+              $timeout(function() {
+                return element.intlTelInput('setNumber', newValue);
+              });
               if (!(options.skipUtilScriptDownload || attrs.skipUtilScriptDownload !== void 0 || options.utilsScript)) {
                 element.intlTelInput('loadUtils', '/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js');
               }

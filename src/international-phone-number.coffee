@@ -92,12 +92,13 @@ angular.module("internationalPhoneNumber", [])
           ctrl.$modelValue = newValue
 
         element.intlTelInput(options)
+        $timeout ->
+          element.intlTelInput('setNumber', newValue)
 
         unless options.skipUtilScriptDownload || attrs.skipUtilScriptDownload != undefined || options.utilsScript
           element.intlTelInput('loadUtils', '/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js')
 
         watchOnce()
-
     )
 
     scope.$watch('country', (newValue) ->
@@ -108,7 +109,6 @@ angular.module("internationalPhoneNumber", [])
     ctrl.$formatters.push (value) ->
       if !value
         return value
-
       element.intlTelInput 'setNumber', value
       checkReadOnly()
       element.val()
